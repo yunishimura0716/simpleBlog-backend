@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  db:
+
+services:
+  web:
+    build: .
+    image: blogbackend:latest
+    volumes:
+      - .:/backend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: simpleblog
+  db:
+    image: mongo
+    tty: true
+    environment:
+      MONGO_INITDB_DATABASE: simpleblog
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongodb
+    volumes:
+      - ./data:/var/lib/mongo/data
+    hostname: localhost
+    ports:
+      - 27017:27017
