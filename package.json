@@ -15,17 +15,10 @@
     "lintFix": "eslint . --ext .ts,.tsx --fix",
     "prettier": "prettier --write ."
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "npm lintFix",
-      "npm prettier"
-    ]
-  },
+  "pre-commit": [
+    "lintFix",
+    "prettier"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
